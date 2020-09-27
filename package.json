@@ -11,7 +11,10 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-firebase-hooks": "^2.2.0",
-    "react-scripts": "3.4.3"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "react-spinkit": "^3.0.0",
+    "twilio-video": "^2.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

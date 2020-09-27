@@ -4,7 +4,7 @@ import './App.css';
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 
-import VideoChat from "../Video/VideoChat";
+import VideoManager from "../Video/VideoManager";
 import GoogleLogin from "../Auth/GoogleLogin";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -36,7 +36,7 @@ function App() {
                 <h1>Reactbase Video Chat <span role="img" aria-label="Fire">🔥</span></h1>
             </header>
             <main>
-                {user ? <VideoChat /> : <GoogleLogin />}
+                {user ? <VideoManager username={user.displayName}/> : <GoogleLogin />}
             </main>
             <footer>
 
