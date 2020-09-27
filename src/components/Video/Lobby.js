@@ -1,35 +1,24 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import Spinner, { displayName } from "react-spinkit";
+import React from 'react'
 
-export default function Lobby(props) {
-    async function findRoom(roomName) {
-        const data = await fetch(`/api/rooms/${roomName}`, {
-            method: 'GET'
-        }).then(res => res.json()).catch(e => {
-            // Catch errors such as 404.
-            return false;
-        });
-        return data.roomExists;
-    }
-    const [response, setResponse] = useState();
+export default function Lobby({
+    username,
+    roomName,
+    handleSubmit,
+    handleRoomNameChange
+}) {
     return (
-        <div>
-            <h3>Welcome {props.username}!</h3>
-            <p>Enter the name of the call you want to create or join below.</p>
-            <div>
-                <input type="text" onChange={async event => {
-                    setResponse(
-                        <Spinner name="ball-clip-rotate-multiple" />
-                    );
-                    // const roomExists = await findRoom(event.target.value)
-                    const path = `/rooms/${event.target.value}`;
-                    setResponse(<Link exact path={path}>Join room</Link>);
-                }}/>
-                <div>
-                    {response}
-                </div>
-            </div>
-        </div>
+        <form onSubmit={handleSubmit}>
+            <h3>Welcome {username}!</h3>
+            <p>Enter the name of the room you want to join.</p>
+            <label htmlFor="room">Room name:</label>
+            <input
+                type="text"
+                id="room"
+                value={roomName}
+                onChange={handleRoomNameChange}
+                required
+            />
+            <button type="submit">Submit</button>
+        </form>
     )
 }

@@ -27,3 +27,5 @@ yarn-error.log*
 .env
 .venv
 api.egg-info
+.runtimeconfig.json
+ui-debug.log
