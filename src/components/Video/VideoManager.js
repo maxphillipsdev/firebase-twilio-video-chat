@@ -1,7 +1,6 @@
-import React, { Component, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Room from "./Room";
 import Lobby from "./Lobby";
-import { auth } from "../App/App";
 import "./VideoManager.css";
 
 function VideoManager(props) {
@@ -12,21 +11,21 @@ function VideoManager(props) {
 
     const handleSubmit = useCallback(
         async (event) => {
+            console.log("Token requested by client.");
             event.preventDefault();
-            const data = await fetch(`/api/token`, {
+
+            let data = await fetch("/api/token", {
                 method: "POST",
                 body: JSON.stringify({
                     username: username,
-                    room: roomName,
+                    room: roomName
                 }),
                 headers: {
-                    "Content-Type": "application/json",
-                },
-            }).then((res) => res.json());
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json());
             setToken(data.token);
-        },
-        [username, roomName]
-    );
+        }, [username, roomName]);
 
     const handleRoomNameChange = useCallback(event => {
         setRoomName(event.target.value);

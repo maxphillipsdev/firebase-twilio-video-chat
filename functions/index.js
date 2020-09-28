@@ -2,6 +2,11 @@ const functions = require('firebase-functions');
 
 
 exports.getToken = functions.https.onRequest((req, res) => {
+
+    if (req.method !== "POST") {
+        return res.status(503);
+    }
+
     const username = req.body.username;
     const roomName = req.body.room;
 
@@ -18,15 +23,16 @@ exports.getToken = functions.https.onRequest((req, res) => {
         room: roomName,
     });
 
+
     // Create an access token which we will sign and return to the client,
     // containing the grant we just created
     const token = new AccessToken(
-    twilioAccountSid,
-    twilioApiKey,
-    twilioApiSecret,
-    {identity: username}
+        twilioAccountSid,
+        twilioApiKey,
+        twilioApiSecret,
+        {identity: username}
     );
     token.addGrant(videoGrant);
 
-    res.send(token.toJwt());
+    res.send({token: token.toJwt()});
 });
