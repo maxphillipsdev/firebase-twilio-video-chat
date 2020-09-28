@@ -29,3 +29,5 @@ yarn-error.log*
 api.egg-info
 .runtimeconfig.json
 ui-debug.log
+.firebase/hosting.YnVpbGQ.cache
+firebase-debug.log
